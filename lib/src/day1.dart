@@ -23,7 +23,7 @@ Future<void> day1() async {
   print('Part 1: ${totalDiff.toString()}');
 
   //Part 2
-  var m = Map.fromIterable(l1.toSet(), key: (k) => k, value: (v) => 0);
+  var m = {for (var k in l1.toSet()) k: 0};
   for (var element in l2) {
     if (m.containsKey(element)) {
       m[element] = m[element]! + 1;
