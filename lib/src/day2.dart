@@ -25,17 +25,37 @@ Future<void> day2() async {
   //   print('${report.toString()} --> ${reportIsSafe(report)}');
   // }
 
-  final safeCount = reports
+  var startTime = DateTime.now();
+  var safeCount = reports
       .map((r) => reportIsSafe(r))
       .toList()
       .where((test) => test == true)
       .length;
+  var executionTime = DateTime.now().difference(startTime);
 
-  print('Day 2, part 1: ${safeCount.toString()}');
+  print(
+      'Day 2, part 1: ${safeCount.toString()} (${executionTime.inMilliseconds}ms)');
 
   //Part 2
+  startTime = DateTime.now();
+  safeCount = reports
+      .map((r) => reportIsSafeViaProblemDampener(r))
+      .toList()
+      .where((test) => test == true)
+      .length;
+  executionTime = DateTime.now().difference(startTime);
 
-  //print('Part 2: ${similarityScore.toString()}');
+  print(
+      'Day 2, part 2: ${safeCount.toString()} (${executionTime.inMilliseconds}ms)');
+}
+
+bool reportIsSafeViaProblemDampener(List<int> report) {
+  final miniReports =
+      List.generate(report.length, (i) => [...report]..removeAt(i));
+  //print(miniReports.join('\n'));
+  final outcomes = miniReports.map((r) => reportIsSafe(r)).toList();
+  if (outcomes.contains(true)) return true;
+  return false;
 }
 
 bool reportIsSafe(List<int> report) {
