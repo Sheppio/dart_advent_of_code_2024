@@ -1,3 +1,4 @@
+// ignore_for_file: unused_import
 import 'package:dart_advent_of_code_2024/src/day1.dart';
 import 'package:dart_advent_of_code_2024/src/day2.dart';
 
